@@ -1,65 +1,181 @@
-FUNCTIONS:
+PHP
+	include("fMpivot/class/fMpivot.php");
 	
-	eId:	//Encode ID
-		eId(id,innerHTML etc, content[,add to]);
+	Start new pivot
+		$fMpivot = new fMpivot(
+			(int) width of tabs,
+			(int) space between top of screen and tabs,
+			(int) the minimum height of a tab (except when a tab is smaller that this height),
+			(bool)(none) should the output be minimized (no space, no linebreaks) (standard: true)
+		);
+		fx:
+			$fMpivot = new fMpivot(
+				900,
+				60,
+				250,
+				false
+			);
+		OR:
+			$fMpivot = new fMpivot(
+				900,
+				60,
+				250
+			);
 		
-		Set innerhtml, style, ....
-		Sets document.getElementById(id).innerHTML = content;
-
-	eIdAdd	//Encode ID Add
-		eIdAdd(id,innerHTML etc, content[,add to);
-
-		Add to innerhtml, style, ....
-		Adds to ducoment.getElementById(id).innerHTML += content;
-
-	eFunc	//Encode Function
-		eFunc(function,array(value0,value1,value2));
-
-		Runs a function
-		In JAVASCRIPT:
-			To set the function, use this methoid
-			fMfunc[testFunc] = function(c) {
-				alert(c[0]);
-			};
-		
-		In PHP:
-			eFunc(testFunc,array(thisWillBeAlerted));
+	Add a tab
+		$fMpivot->addTab(
+			(string) an id (no space),
+			(string) title,
+			(string) content,
+			(string) overlay content,
+			(string)(bool) onclick event (send (bool)true, if just standard goto tab)
+			(array)(none) attributes (standard: none)
+		);
+		fx:
+			$fMpivot->addTab(
+				"first_tab",
+				"First tab",
+				"This is the first tab",
+				"",
+				true
+			);
+		OR:
+			$fMpivot->addTab(
+				"second_tab",
+				"Second tab",
+				"This is the second tab",
+				"And this is the overlay text",
+				"run_this_function();",
+				array(
+					"title" => "Show this title, when hover over title"
+				)
+			);
+	
+	Set focus on a tab
+		$fMpivot->setFocus(
+			(int)(string) number of tab (starting from 0) or id of tab
+		);
+		fx:
+			$fMpivot->setFocus(
+				1
+			);
+		OR:
+			$fMpivot->setFocus(
+				"second_tab"
+			);
+	
+	Set speed of animations
+		$fMpivot->setAnimationSpeed(
+			(int)(none) speed of color change of the titles (ms) (standard = 500ms),
+			(int)(none) speed of content change (ms) (standard = 500ms)
+		);
+		fx:
+			$fMpivot->setAnimationSpeed(
+				1000,
+				200
+			);
+		OR:
+			$fMpivot->setAnimationSpeed(
+				1000
+			);
+		OR:
+			$fMpivot->setAnimationSpeed(
+				"",
+				1000
+			);
+	
+	Set color of titles when hover and not
+		$fMpivot->setHeaderColor(
+			(string)(none) default color (must be in this format "#xxxxxx") (standard: "#808080" grey),
+			(string)(none) hover and focus color (must be in this format "#xxxxxx") (standard: "#FF0000" red)
+		);
+		fx:
+			$fMpivot->setHeaderColor(
+				"#FF0000",
+				"#808080"
+			);
+		OR:
+			$fMpivot->setHeaderColor(
+				"#FF0000"
+			);
+		OR:
+			$fMpivot->setHeaderColor(
+				"",
+				"#808080"
+			);
 			
-	eVar	//Encode Var
-		eVar(var,value);
+	Get html code
+		$fMpivot->getPivot();
+		fx:
+			echo $fMpivot->getPivot();
+			
+	Get javascript code	(must run in $(document).ready();)
+		$fMpivot->getJavascript();
+		fx:
+			echo $fMpivot->getJavascript();
 
-		Set a varible
-		window[var] = value;
-
-	eRun	//Encode Run
-		eRun(code);
-
-		Run some code
-		eval(code);
-
-	eAlert	//Encode Alert
-		eAlert(text);
+HTML
+	NEED jQuery			http://docs.jquery.com/Downloading_jQuery
+	NEED jQuery.color	http://plugins.jquery.com/project/color
+	<script type='text/javascript' src='fMpivot/js/fMpivot.js'></script>
+	<link rel='stylesheet' type='text/css' href='fMpivot/css/fMpivot.css' />
+	
+JAVASCRIPT
+	Show overlay content
+		fMpivot.content1show();
 		
-		Alert some text
-		alert(text);
-
-	eNote	//Encode Note
-		eNote(id,text);
-
-		Leave a note to the PHP-document.. WILL NOT BE SENT
-		Useful when opening the ajax document on site-reload
-		Get the note by:
-			global $AJAX;
-			utf8_decode($AJAX["note"][id]);
-
-In PHP use:
-	
-	include("class/fMjson.php");
-	global $fMjson;
-	$fMjson = new fMjson();
-
-In Javascript:
-	<script type="text/javascript" src="/js/fMjson.js"></script>
-	
-	The response from ajax, should be put into this function:
-		fMjson(JSON.parse(THE_RESPONSE));
+	Hide overlay content
+		fMpivot.content1hide();
+		
+	Run the onclick-event of a tab (use this, when you will swich to a tab)
+		fMpivot.runTab(
+			(int)(string) number of the tap (starting from 0) or id of the tab,
+		);
+		fx:
+			fMpivot.gotoTab(
+				1
+			);
+		OR:
+			fMpivot.gotoTab(
+				"second_tab"
+			);
+		
+	Goto a tab (use this in the end of the function, if you have set another onclick to a tab than the standard - this will do the actually tab-switch)
+		fMpivot.gotoTab(
+			(int)(string) number of the tap (starting from 0) or id of the tab,
+			(function)(none) callback
+		);
+		fx:
+			fMpivot.gotoTab(
+				1
+			);
+		OR:
+			fMpivot.gotoTab(
+				"second_tab",
+				function() {
+					alert("Has done switching");
+				}
+			);
+			
+	Resize the shown area (use this, if yout have putted new content into the content-div)
+		fMpivot.resize(
+			(bool)(none) return the new heights (probably none use for this)
+		);
+		fx:
+			fMpivot.resize();
+		OR:
+			fMpivot-resize(
+				true
+			);
+			
+	Set and/or test the height above the tabs
+		fMpivot.heightTopNew(
+			(int) new height (in px)
+		);
+		fx:
+			fMpivot.heightTopNew(
+				200
+			);
+			
+	Get the number of the current tab
+		fMpivot.current();

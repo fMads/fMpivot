@@ -23,14 +23,14 @@
 			$this->minimizeString = $minimizeString;
 		}
 		
-		public function setAnimationSpeed($headerHover,$contentMove) {
+		public function setAnimationSpeed($headerHover,$contentMove = "") {
 			if($headerHover != "")
 				$this->animationSpeed["headerHover"] = $headerHover;
 			if($contentMove != "")
 				$this->animationSpeed["contentMove"] = $contentMove;
 		}
 		
-		public function setHeaderColor($color,$colorHover) {
+		public function setHeaderColor($color,$colorHover = "") {
 			if($color != "")
 				$this->header["color"] = $color;
 			if($colorHover != "")
@@ -55,7 +55,7 @@
 			}
 		}
 		
-		public function addTab($id,$title,$content0,$content1,$onclick,$X) {
+		public function addTab($id,$title,$content0,$content1,$onclick,$X = "") {
 			$this->tabs["i"][] = array(
 				$id,
 				$title,

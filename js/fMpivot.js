@@ -27,7 +27,7 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 			}
 		});
 		
-		this.runI(this.current());
+		this.runTab(this.current());
 		
 		this.firstRun = false;
 	};
@@ -41,7 +41,16 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 		return parseInt($('#pivotHeader span.pivotFocus').attr("pivoti"));
 	};
 	
-	this.runI = function(i) {
+	this.runTab = function(tab) {
+		var i;
+		switch(typeof(tab)) {
+			case "number": {
+				i = tab;
+			}	break;
+			case "string": {
+				i = $('#pivotHeader span[pivotid="' + tab + '"]').attr("pivoti");
+			}	break;
+		}
 		var pivotHeader = $('#pivotHeader span[pivoti=' + i + ']');
 		if(typeof(pivotHeader.prop('onclick')) == 'function') {
 			pivotHeader.prop('onclick').call();
@@ -91,6 +100,7 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 			}
 		);
 	};
+	
 	this.content1show = function(text) {
 		this.content1showing = true;
 		
@@ -103,6 +113,7 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 		
 		this.resize();
 	};
+	
 	this.content1hide = function() {
 		this.content1showing = false;
 		$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent0"]:hidden').fadeIn(500);
