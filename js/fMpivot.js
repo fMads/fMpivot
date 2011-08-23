@@ -129,8 +129,8 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 			var theHeight = $('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent1"]').height();
 		}
 		
-		if(newHeight < this.heightMin) {
-			newHeight = this.heightMin;
+		if(newHeight < this.heightMinimum) {
+			newHeight = this.heightMinimum;
 		}
 		if(newHeight > theHeight) {
 			newHeight = theHeight;
