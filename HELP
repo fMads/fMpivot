@@ -1,0 +1,65 @@
+FUNCTIONS:
+	
+	eId:	//Encode ID
+		eId(id,innerHTML etc, content[,add to]);
+		
+		Set innerhtml, style, ....
+		Sets document.getElementById(id).innerHTML = content;
+
+	eIdAdd	//Encode ID Add
+		eIdAdd(id,innerHTML etc, content[,add to);
+
+		Add to innerhtml, style, ....
+		Adds to ducoment.getElementById(id).innerHTML += content;
+
+	eFunc	//Encode Function
+		eFunc(function,array(value0,value1,value2));
+
+		Runs a function
+		In JAVASCRIPT:
+			To set the function, use this methoid
+			fMfunc[testFunc] = function(c) {
+				alert(c[0]);
+			};
+		
+		In PHP:
+			eFunc(testFunc,array(thisWillBeAlerted));
+			
+	eVar	//Encode Var
+		eVar(var,value);
+
+		Set a varible
+		window[var] = value;
+
+	eRun	//Encode Run
+		eRun(code);
+
+		Run some code
+		eval(code);
+
+	eAlert	//Encode Alert
+		eAlert(text);
+		
+		Alert some text
+		alert(text);
+
+	eNote	//Encode Note
+		eNote(id,text);
+
+		Leave a note to the PHP-document.. WILL NOT BE SENT
+		Useful when opening the ajax document on site-reload
+		Get the note by:
+			global $AJAX;
+			utf8_decode($AJAX["note"][id]);
+
+In PHP use:
+	
+	include("class/fMjson.php");
+	global $fMjson;
+	$fMjson = new fMjson();
+
+In Javascript:
+	<script type="text/javascript" src="/js/fMjson.js"></script>
+	
+	The response from ajax, should be put into this function:
+		fMjson(JSON.parse(THE_RESPONSE));
