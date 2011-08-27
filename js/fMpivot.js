@@ -104,7 +104,7 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 	this.content1show = function(text) {
 		this.content1showing = true;
 		
-		$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent0"]').fadeOut(this.contentMove);
+		$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent0"]').fadeTo(this.contentMove,0);
 		if(text == undefined) {
 			$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent1"]').fadeIn(this.contentMove);
 		} else {
@@ -116,7 +116,7 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 	
 	this.content1hide = function() {
 		this.content1showing = false;
-		$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent0"]:hidden').fadeIn(500);
+		$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent0"]').fadeTo(500,1);
 		$('#pivotContent div[name="pivotContent"] div[name="pivotContent1"]:visible').fadeOut(500);
 		this.resize();
 	};

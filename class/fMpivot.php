@@ -74,7 +74,7 @@
 					
 					list($id,$title,$content0,$content1,$onclick,$X) = $tab;
 					
-					$X["onclick"] = ($onclick == true) ? "fMpivot.gotoTab(%I%);" : $onclick;
+					$X["onclick"] = ($onclick === true) ? "fMpivot.gotoTab(%I%);" : $onclick;
 					if($onclick != "")
 						$X["class"] .= ((isset($X["class"])) ? " " : "") . "pivotClickable";
 					
