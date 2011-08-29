@@ -3,7 +3,7 @@
 		private $width;
 		private $heightTop;
 		private $heightMinimum;
-		private $focus = 0;
+		var $focus = 0;
 		private $tabs = array("i","id");
 		private $minimizeString;
 		
@@ -40,14 +40,14 @@
 		public function setFocus($id) {
 			if(is_int($id)) {
 				if(isset($this->tabs["i"][$id])) {
-					$focus = $id;
+					$this->focus = $id;
 					return true;
 				} else {
 					return false;
 				}
 			} else {
 				if(isset($this->tabs["id"][$id])) {
-					$focus = $this->tabs["id"][$id];
+					$this->focus = $this->tabs["id"][$id];
 					return true;
 				} else {
 					return false;
