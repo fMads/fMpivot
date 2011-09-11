@@ -1,44 +1,12 @@
-/*	METRO	*/
-#pivotHeader {
-	position:relative;
-	font-size:24px; 
-	color:#969696;
-	padding-bottom:10px;
-	overflow:hidden;
-	white-space:nowrap;
-	text-overflow:ellipsis;
-	font-family:Arial Black, Arial, Helvetica, Sans-Serif;
-}
-#pivotHeader span {
-	margin-right:20px;
-}
-#pivotContentOuter {
-	overflow-x:hidden;
-	overflow-y:auto;
-}
-#pivotContent {
-	position:relative;
-	overflow:hidden;
-}
-.pivotContent {
-	float:left;
-	position:relative;
-}
-.pivotHide {
-	opacity: 0;
-}
-.pivotClear {
-	clear:both;
-	padding:0;
-}
-.pivotContent1 {
-	position: absolute;
-	left:0;
-	top:0;
-	background-color:white;
-	display:none;
-}
-.pivotClickable {
-	cursor: pointer;
-}
+#pivotContentOuter {overflow-x:hidden;overflow-y:auto;}
 
+#pivotHeader {position:relative;font-size:24px; color:#969696;padding-bottom:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-family:Arial Black, Arial, Helvetica, Sans-Serif;}
+#pivotHeader span {margin-right:20px;}
+#pivotHeader .pivotClickable {cursor: pointer;}
+
+#pivotContent {position:relative;overflow:hidden;}
+#pivotContent .pivotContent {float:left;position:relative;}
+#pivotContent .pivotHide {opacity: 0;}
+#pivotContent .pivotContent1 {position: absolute;left:0;top:0;background-color:white;display:none;}
+
+.pivotClear {clear:both;padding:0;}
