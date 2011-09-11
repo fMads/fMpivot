@@ -40,14 +40,14 @@
 		public function setFocus($id) {
 			if(is_int($id)) {
 				if(isset($this->tabs["i"][$id])) {
-					$focus = $id;
+					$this->focus = $id;
 					return true;
 				} else {
 					return false;
 				}
 			} else {
 				if(isset($this->tabs["id"][$id])) {
-					$focus = $this->tabs["id"][$id];
+					$this->focus = $this->tabs["id"][$id];
 					return true;
 				} else {
 					return false;
@@ -74,7 +74,7 @@
 					
 					list($id,$title,$content0,$content1,$onclick,$X) = $tab;
 					
-					$X["onclick"] = ($onclick == true) ? "fMpivot.gotoTab(%I%);" : $onclick;
+					$X["onclick"] = ($onclick === true) ? "fMpivot.gotoTab(%I%);" : $onclick;
 					if($onclick != "")
 						$X["class"] .= ((isset($X["class"])) ? " " : "") . "pivotClickable";
 					

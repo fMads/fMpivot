@@ -37,8 +37,12 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 		this.resize();
 	};
 	
-	this.current = function() {
-		return parseInt($('#pivotHeader span.pivotFocus').attr("pivoti"));
+	this.current = function(returnId) {
+		if(returnId == true) {
+			return $('#pivotHeader span.pivotFocus').attr("pivotid");
+		} else {
+			return parseInt($('#pivotHeader span.pivotFocus').attr("pivoti"));
+		}
 	};
 	
 	this.runTab = function(tab) {
@@ -104,7 +108,7 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 	this.content1show = function(text) {
 		this.content1showing = true;
 		
-		$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent0"]').fadeOut(this.contentMove);
+		$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent0"]').fadeTo(this.contentMove,0);
 		if(text == undefined) {
 			$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent1"]').fadeIn(this.contentMove);
 		} else {
@@ -114,10 +118,10 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 		this.resize();
 	};
 	
-	this.content1hide = function() {
+	this.content1hide = function(callback) {
 		this.content1showing = false;
-		$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent0"]:hidden').fadeIn(500);
-		$('#pivotContent div[name="pivotContent"] div[name="pivotContent1"]:visible').fadeOut(500);
+		$('#pivotContent div[name="pivotContent"][pivoti="' + this.current() + '"] div[name="pivotContent0"]').fadeTo(500,1);
+		$('#pivotContent div[name="pivotContent"] div[name="pivotContent1"]:visible').fadeOut(500,callback);
 		this.resize();
 	};
 	
@@ -149,6 +153,19 @@ function fMpivot(width,heightTop,heightMinimum,headerHover,contentMove,headerCol
 				$(this).css("overflowY","auto");
 			}
 		);
+	};
+	
+	this.getContent = function(tab,contentI) {
+		if(tab == undefined)
+			tab = this.current();
+			
+		if(contentI === undefined)
+			contentI = this.content1showing;
+		
+		if(typeof(tab) == "string")
+			tab = $('#pivotHeader span[pivotid="' + tab + '"]').attr("pivoti");
+		
+		return $('#pivotContent div[name="pivotContent"][pivoti="' + tab + '"] div[name="pivotContent' + ((contentI == true) ? 1 : 0) + '"]');
 	};
 	
 	this.ieTest = function() {
