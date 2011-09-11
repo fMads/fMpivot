@@ -3,7 +3,7 @@
 		private $width;
 		private $heightTop;
 		private $heightMinimum;
-		var $focus = 0;
+		private $focus = 0;
 		private $tabs = array("i","id");
 		private $minimizeString;
 		
